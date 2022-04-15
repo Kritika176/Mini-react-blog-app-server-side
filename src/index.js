@@ -42,7 +42,7 @@ app.use("/register",registerController);
 app.use("/login",loginController);
 app.use("/post",postController);
 app.use("/images",express.static(path.join(__dirname,"/images")))
-app.listen(8080,async() => {
+app.listen(process.env.PORT||8080,async() => {
     try{
       await  connect();
         console.log("connected to port 8080")
