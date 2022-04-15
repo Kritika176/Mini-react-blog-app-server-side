@@ -34,6 +34,9 @@ const registerController = require("./controllers/register.controller");
 const loginController = require("./controllers/login.controller");
 const postController = require("./controllers/post.controller");
 
+app.get('/', (req, res) => {
+    res.send('This is blog backend server')
+})
 
 app.use("/register",registerController);
 app.use("/login",loginController);
