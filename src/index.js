@@ -1,32 +1,25 @@
 const express = require("express");
-var cors = require('cors')
-const multer = require("multer");
+const cors = require('cors')
+
 const mongoose = require("mongoose");
 const app = express();
-const path = require("path");
+
 const dotenv = require("dotenv") 
  dotenv.config();
 app.use(express.json());
  app.use(cors({origin: true, credentials: true}));
-const storage = multer.diskStorage({
-    destination:(req,file,cb) =>{
-        cb(null,"./images")
-    },filename:(req,file,cb) =>{
-        cb(null,req.body.name)
-    }
-});
-const upload = multer({storage:storage})
-app.post("/single",upload.single("file"),(req,res) =>{
-    return res.send("File uploaded")
-})
- 
- 
-const connect =  () => {
 
+ 
+ 
+const connect =  async() => {
+try  {
     return  mongoose.connect(
         "mongodb+srv://kritika176:kritika@cluster0.4hoe3.mongodb.net/blog?retryWrites=true&w=majority"
      )
-    
+}
+catch(err){
+    console.log("connection error")
+}
     }
 const registerController = require("./controllers/register.controller");
 const loginController = require("./controllers/login.controller");
@@ -39,7 +32,7 @@ app.get('/', (req, res) => {
 app.use("/register",registerController);
 app.use("/login",loginController);
 app.use("/post",postController);
-app.use("/images",express.static(path.join(__dirname,"/images")))
+
 app.listen(process.env.PORT||8080,async() => {
     try{
       await  connect();
