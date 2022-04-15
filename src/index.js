@@ -24,9 +24,7 @@ app.post("/single",upload.single("file"),(req,res) =>{
 const connect =  () => {
 
     return  mongoose.connect(
-         process.env.URL,{
-             useNewUrlParser:true,
-         }
+        "mongodb+srv://kritika176:kritika@cluster0.4hoe3.mongodb.net/blog?retryWrites=true&w=majority"
      )
     
     }
